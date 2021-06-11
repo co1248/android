@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SampleWidget</string>
+    <string name="persom_name">홍길동</string>
+</resources>

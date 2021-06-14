@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     TextView textView;
+    GestureDetector detector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,57 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        detector = new GestureDetector(this, new GestureDetector.OnGestureListener) {
+            @Override
+            public boolean onDown(MosionEvent mosionEvent) {
+                printIn("onDown() 호출됨.");
+
+                return true;
+            }
+
+
+            @Override
+            public void onShowPress(MosionEvent mosionEvent) {
+                printIn("onShowPress() 호출됨.");
+            }
+
+            @Override
+            public boolean onSingleTapUp(MosionEvent mosionEvent) {
+                printIn("onSingleTapUp() 호출됨.");
+
+                return true;
+            }
+
+            @Override
+            public boolean onScroll(MosionEvent mosionEvent, MosionEvent mosionEvent1, float v, float v1) {
+                printIn("onScroll() 호출됨." + v + " , " + v1);
+
+                return true;
+            }
+
+            @Override
+            public void onLongPress(MosionEvent mosionEvent) {
+                printIn("onLongPress() 호출됨.");
+            }
+
+            @Override
+            public boolean onFling(MosionEvent mosionEvent, MosionEvent mosionEvent1, float v, float v1) {
+                printIn("onFling() 호출됨." + v + " , " + v1);
+
+                return true;
+            }
+        });
+
+        View view2 = findViewByid(R.id.view2);
+        view2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MosionEvent mosionEvent) {
+                detector.onTouchEvent(mosionEvent);
+                return true;
+            }
+        });
+
     }
     public  void  printIn(String data) {
         textView.append(data + "\n");
